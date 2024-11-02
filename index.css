@@ -1,0 +1,34 @@
+/*grid tutrial: https://www.w3schools.com/css/css_grid.asp*/
+.grid-container {
+    /*display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: blue;
+    padding: 10px;*/
+}
+.grid-item {
+
+}
+
+.joystick {
+    border: 1px solid #000;
+    background: #eee;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    position: relative;
+}
+.stick {
+    width: 50px;
+    height: 50px;
+    background: #333;
+    border-radius: 50%;
+    position: absolute;
+    top: 75px;
+    left: 75px;
+}
+.button{
+    width: 25px;
+    height: 50px;
+    background: #888;
+    position: relative; 
+}
