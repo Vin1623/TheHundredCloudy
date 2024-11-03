@@ -87,13 +87,13 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         if (event.key.toLowerCase() === 'w') {
             console.log('You pressed the W key!');
         } 
-        if (event.key.toLowerCase() === 'a') {
+        else if (event.key.toLowerCase() === 'a') {
             console.log('You pressed the A key!');
         }
-        if (event.key.toLowerCase() === 's') {
+        else if (event.key.toLowerCase() === 's') {
             console.log('You pressed the S key!');
         } 
-        if (event.key.toLowerCase() === 'd') {
+        else if (event.key.toLowerCase() === 'd') {
             console.log('You pressed the D key!');
         } else {
             return;
@@ -103,13 +103,13 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             if (event.key.toLowerCase() === 'w') {
                 console.log('You pressed the W key!');
             } 
-            if (event.key.toLowerCase() === 'a') {
+            else if (event.key.toLowerCase() === 'a') {
                 console.log('You pressed the A key!');
             } 
-            if (event.key.toLowerCase() === 's') {
+            else if (event.key.toLowerCase() === 's') {
                 console.log('You pressed the S key!');
             } 
-            if (event.key.toLowerCase() === 'd') {
+            else if (event.key.toLowerCase() === 'd') {
                 console.log('You pressed the D key!');
             } else {
                 return;
