@@ -78,7 +78,7 @@ def index(requsst):
 @app.get('/direction')
 @with_websocket
 async def index(request, ws):
-    #try:
+    try:
         while True:
             mode = await ws.receive()
             ## Insert your logic here
@@ -108,11 +108,11 @@ async def index(request, ws):
                 motor_stop(fL_pin1, fL_pin2, PWM2)
                 motor_stop(fR_pin1, fR_pin2, PWM3)
                 motor_stop(bR_pin1, bR_pin2, PWM4)
-
-    #except Exception as e:
-     #   print(f"WebSocket error: {e}")
-    #finally:
-     #   print("WebSocket connection closed")
+                
+    except Exception as e:
+        print(f"WebSocket error: {e}")
+    finally:
+        print("WebSocket connection closed")
 
 app.run(port=80)
 #testing vin
