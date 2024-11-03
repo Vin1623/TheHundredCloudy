@@ -17,10 +17,10 @@ PWM1 = PWM(Pin(3, Pin.OUT), freq=1000)
 PWM2 = PWM(Pin(11, Pin.OUT), freq=1000)
 PWM3 = PWM(Pin(27, Pin.OUT), freq=1000)
 PWM4 = PWM(Pin(19, Pin.OUT), freq=1000)
-bL_pin1, bL_pin2 = Pin(0, Pin.OUT), Pin(10, Pin.OUT) # in1, in2
-fL_pin1, fL_pin2 = Pin(9, Pin.OUT), Pin(5, Pin.OUT) # in3, in4
-fR_pin1, fR_pin2 = Pin(26, Pin.OUT), Pin(22, Pin.OUT) # in5, in6
-bR_pin1, bR_pin2 = Pin(20, Pin.OUT), Pin(21, Pin.OUT) # in7, in8
+bL_pin1, bL_pin2 = Pin(0, Pin.OUT), Pin(10, Pin.OUT) # in1, in2 (motor1)
+fL_pin1, fL_pin2 = Pin(9, Pin.OUT), Pin(5, Pin.OUT) # in3, in4 (motor2)
+fR_pin1, fR_pin2 = Pin(26, Pin.OUT), Pin(22, Pin.OUT) # in5, in6 (motor3)
+bR_pin1, bR_pin2 = Pin(20, Pin.OUT), Pin(21, Pin.OUT) # in7, in8 (motor4)
 
 '''
 en1, en2, en3, en4 = 3, 11, 27, 19
@@ -83,6 +83,8 @@ async def index(request, ws):
             mode = await ws.receive()
             ## Insert your logic here
             print("key", mode)
+            #big robot
+            '''
             if mode=='w':
                 motor_forward(75, bL_pin1, bL_pin2, PWM1)
                 motor_forward(75, fL_pin1, fL_pin2, PWM2)
@@ -103,11 +105,37 @@ async def index(request, ws):
                 motor_forward(75, fL_pin1, fL_pin2, PWM2)
                 motor_reverse(75, fR_pin1, fR_pin2, PWM3)
                 motor_reverse(75, bR_pin1, bR_pin2, PWM4)
+            '''
+                
+            #small robot
+            if mode=='w': #compared to a
+                motor_reverse(75, bL_pin1, bL_pin2, PWM1) 
+                motor_reverse(75, fL_pin1, fL_pin2, PWM2) 
+                motor_forward(75, fR_pin1, fR_pin2, PWM3)
+                motor_forward(75, bR_pin1, bR_pin2, PWM4)
+            elif mode=='s': #compared to d
+                motor_forward(75, bL_pin1, bL_pin2, PWM1)
+                motor_forward(75, fL_pin1, fL_pin2, PWM2) 
+                motor_reverse(75, fR_pin1, fR_pin2, PWM3)
+                motor_reverse(75, bR_pin1, bR_pin2, PWM4)
+            elif mode=='a': #compared to w
+                motor_forward(75, bL_pin1, bL_pin2, PWM1)
+                motor_forward(75, fL_pin1, fL_pin2, PWM2)
+                motor_forward(75, fR_pin1, fR_pin2, PWM3)
+                motor_forward(75, bR_pin1, bR_pin2, PWM4)
+            elif mode=='d': #compared to s
+                motor_reverse(75, bL_pin1, bL_pin2, PWM1)
+                motor_reverse(75, fL_pin1, fL_pin2, PWM2)
+                motor_reverse(75, fR_pin1, fR_pin2, PWM3)
+                motor_reverse(75, bR_pin1, bR_pin2, PWM4)
+            
             else:
                 motor_stop(bL_pin1, bL_pin2, PWM1)
                 motor_stop(fL_pin1, fL_pin2, PWM2)
                 motor_stop(fR_pin1, fR_pin2, PWM3)
                 motor_stop(bR_pin1, bR_pin2, PWM4)
+                
+            
                 
     except Exception as e:
         print(f"WebSocket error: {e}")
