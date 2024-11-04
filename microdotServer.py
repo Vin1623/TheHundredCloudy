@@ -107,7 +107,7 @@ async def index(request, ws):
                 motor_reverse(75, bR_pin1, bR_pin2, PWM4)
             '''
                 
-            #small robot
+            #small robot				blackred, redblack, blackred, redblack
             if mode=='w': #compared to a
                 motor_reverse(75, bL_pin1, bL_pin2, PWM1) 
                 motor_reverse(75, fL_pin1, fL_pin2, PWM2) 
