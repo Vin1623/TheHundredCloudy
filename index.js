@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         }
     });
     */
-     
+
     document.addEventListener('keydown', function(event) {
         if (event.key.toLowerCase() === 'w') {
             console.log('You pressed the W key!');
@@ -95,8 +95,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         } 
         else if (event.key.toLowerCase() === 'd') {
             console.log('You pressed the D key!');
-        }
-        else {
+        } else {
             return;
         }
         socket.send(event.key);
@@ -112,8 +111,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             } 
             else if (event.key.toLowerCase() === 'd') {
                 console.log('You pressed the D key!');
-            }
-            else {
+            } else {
                 return;
             }
             socket.send(event.key);
@@ -125,7 +123,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     });
     
     stick.addEventListener('mousedown', (e)=>{
-        dragging = true;
+         dragging = true;
     })
     // 2. Disable dragging of joystick when mousedown/touchdown
     document.addEventListener('mouseup', ()=>{
