@@ -83,10 +83,7 @@ async def index(request, ws):
         while True:
             led.high()
             mode = await ws.receive()
-            if mode.isnumeric():
-                x = int(mode)
-                y = int(await ws.recieve())
-                println(f"{x}, {y}")
+            
             ## Insert your logic here
             print("key", mode)
             #big robot
@@ -134,21 +131,8 @@ async def index(request, ws):
                 motor_reverse(75, fL_pin1, fL_pin2, PWM2)
                 motor_forward(75, fR_pin1, fR_pin2, PWM3)
                 motor_reverse(75, bR_pin1, bR_pin2, PWM4)
-            else:
-                motor_stop(bL_pin1, bL_pin2, PWM1)
-                motor_stop(fL_pin1, fL_pin2, PWM2)
-                motor_stop(fR_pin1, fR_pin2, PWM3)
-                motor_stop(bR_pin1, bR_pin2, PWM4)
-            if y<0:
-                motor_reverse(abs(x+y), bL_pin1, bL_pin2, PWM1)
-                motor_reverse(abs(x+y), fL_pin1, fL_pin2, PWM2)
-                motor_reverse(abs(x-y), fR_pin1, fR_pin2, PWM3)
-                motor_reverse(abs(x-y), bR_pin1, bR_pin2, PWM4)
-            elif y>0:
-                motor_forward(abs(x+y), bL_pin1, bL_pin2, PWM1)
-                motor_forward(abs(x+y), fL_pin1, fL_pin2, PWM2)
-                motor_forward(abs(x-y), fR_pin1, fR_pin2, PWM3)
-                motor_forward(abs(x-y), bR_pin1, bR_pin2, PWM4)
+            
+    
             else:
                 motor_stop(bL_pin1, bL_pin2, PWM1)
                 motor_stop(fL_pin1, fL_pin2, PWM2)
@@ -163,3 +147,5 @@ async def index(request, ws):
 
 app.run(port=80)
 #testing 3
+
+
