@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         }
     });
     */
-
+     
     document.addEventListener('keydown', function(event) {
         if (event.key.toLowerCase() === 'w') {
             console.log('You pressed the W key!');
@@ -95,7 +95,20 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         } 
         else if (event.key.toLowerCase() === 'd') {
             console.log('You pressed the D key!');
-        } else {
+        }
+        else if (event.key.toLowerCase() === 'u') {
+            console.log('You pressed the U key!');
+        } 
+        else if (event.key.toLowerCase() === 'i') {
+            console.log('You pressed the I key!');
+        }
+        else if (event.key.toLowerCase() === 'j') {
+            console.log('You pressed the J key!');
+        }
+        else if (event.key.toLowerCase() === 'k') {
+            console.log('You pressed the K key!');
+        }
+        else {
             return;
         }
         socket.send(event.key);
@@ -111,7 +124,20 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             } 
             else if (event.key.toLowerCase() === 'd') {
                 console.log('You pressed the D key!');
-            } else {
+            }
+            else if (event.key.toLowerCase() === 'u') {
+                console.log('You pressed the U key!');
+            } 
+            else if (event.key.toLowerCase() === 'i') {
+                console.log('You pressed the I key!');
+            }
+            else if (event.key.toLowerCase() === 'j') {
+                console.log('You pressed the J key!');
+            }
+            else if (event.key.toLowerCase() === 'k') {
+                console.log('You pressed the K key!');
+            } 
+            else {
                 return;
             }
             socket.send(event.key);

@@ -13,6 +13,7 @@ from math import sin, cos
 # put sufficient comments for each part of code
 
 # Initialize PWM and direction pins
+led = Pin(2, Pin.OUT)
 PWM1 = PWM(Pin(3, Pin.OUT), freq=1000)
 PWM2 = PWM(Pin(11, Pin.OUT), freq=1000)
 PWM3 = PWM(Pin(27, Pin.OUT), freq=1000)
@@ -80,6 +81,7 @@ def index(requsst):
 async def index(request, ws):
     try:
         while True:
+            led.high()
             mode = await ws.receive()
             ## Insert your logic here
             print("key", mode)
@@ -128,6 +130,7 @@ async def index(request, ws):
                 motor_reverse(75, fL_pin1, fL_pin2, PWM2)
                 motor_forward(75, fR_pin1, fR_pin2, PWM3)
                 motor_reverse(75, bR_pin1, bR_pin2, PWM4)
+                
             
             else:
                 motor_stop(bL_pin1, bL_pin2, PWM1)
