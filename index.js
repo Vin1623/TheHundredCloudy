@@ -95,7 +95,15 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         } 
         else if (event.key.toLowerCase() === 'd') {
             console.log('You pressed the D key!');
-        } else {
+        } 
+        else if (event.key.toLowerCase() === 'i') {
+            console.log('You pressed the I key!');
+        } 
+        else if (event.key.toLowerCase() === 'o') {
+            console.log('You pressed the O key!');
+        } 
+        
+        else {
             return;
         }
         socket.send(event.key);
@@ -111,7 +119,14 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             } 
             else if (event.key.toLowerCase() === 'd') {
                 console.log('You pressed the D key!');
-            } else {
+            } 
+            else if (event.key.toLowerCase() === 'i') {
+                console.log('You pressed the I key!');
+            } 
+            else if (event.key.toLowerCase() === 'o') {
+                console.log('You pressed the O key!');
+            } 
+            else {
                 return;
             }
             socket.send(event.key);
