@@ -107,26 +107,26 @@ async def index(request, ws):
                 motor_reverse(75, bR_pin1, bR_pin2, PWM4)
             '''
                 
-            #small robot				blackred, redblack, blackred, redblack
-            if mode=='w': #compared to a
-                motor_reverse(75, bL_pin1, bL_pin2, PWM1) 
+            #small robot				redblack, redblack, redblack, redblack
+            if mode=='w': 
+                motor_forward(75, bL_pin1, bL_pin2, PWM1) 
                 motor_reverse(75, fL_pin1, fL_pin2, PWM2) 
-                motor_forward(75, fR_pin1, fR_pin2, PWM3)
-                motor_forward(75, bR_pin1, bR_pin2, PWM4)
-            elif mode=='s': #compared to d
-                motor_forward(75, bL_pin1, bL_pin2, PWM1)
-                motor_forward(75, fL_pin1, fL_pin2, PWM2) 
                 motor_reverse(75, fR_pin1, fR_pin2, PWM3)
-                motor_reverse(75, bR_pin1, bR_pin2, PWM4)
-            elif mode=='a': #compared to w
-                motor_forward(75, bL_pin1, bL_pin2, PWM1)
-                motor_forward(75, fL_pin1, fL_pin2, PWM2)
-                motor_forward(75, fR_pin1, fR_pin2, PWM3)
                 motor_forward(75, bR_pin1, bR_pin2, PWM4)
-            elif mode=='d': #compared to s
+            elif mode=='s': 
                 motor_reverse(75, bL_pin1, bL_pin2, PWM1)
-                motor_reverse(75, fL_pin1, fL_pin2, PWM2)
+                motor_forward(75, fL_pin1, fL_pin2, PWM2) 
+                motor_forward(75, fR_pin1, fR_pin2, PWM3)
+                motor_reverse(75, bR_pin1, bR_pin2, PWM4)
+            elif mode=='a': 
+                motor_reverse(75, bL_pin1, bL_pin2, PWM1)
+                motor_forward(75, fL_pin1, fL_pin2, PWM2)
                 motor_reverse(75, fR_pin1, fR_pin2, PWM3)
+                motor_forward(75, bR_pin1, bR_pin2, PWM4)
+            elif mode=='d': 
+                motor_forward(75, bL_pin1, bL_pin2, PWM1)
+                motor_reverse(75, fL_pin1, fL_pin2, PWM2)
+                motor_forward(75, fR_pin1, fR_pin2, PWM3)
                 motor_reverse(75, bR_pin1, bR_pin2, PWM4)
             
             else:
