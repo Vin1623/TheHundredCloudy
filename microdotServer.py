@@ -144,7 +144,7 @@ async def index(request, ws):
                 motor_reverse(abs(x+y), fL_pin1, fL_pin2, PWM2)
                 motor_reverse(abs(x-y), fR_pin1, fR_pin2, PWM3)
                 motor_reverse(abs(x-y), bR_pin1, bR_pin2, PWM4)
-            eilf y>0:
+            elif y>0:
                 motor_forward(abs(x+y), bL_pin1, bL_pin2, PWM1)
                 motor_forward(abs(x+y), fL_pin1, fL_pin2, PWM2)
                 motor_forward(abs(x-y), fR_pin1, fR_pin2, PWM3)
