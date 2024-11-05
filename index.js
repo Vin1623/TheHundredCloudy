@@ -124,21 +124,21 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         socket.send(' ');
     });
     
-    // stick.addEventListener('mousedown', (e)=>{
-    //     dragging = true;
-    // })
-    // // 2. Disable dragging of joystick when mousedown/touchdown
-    // document.addEventListener('mouseup', ()=>{
-    //     if(dragging){
-    //         dragging = false;
-    //         resetStickPosition();
-    //     }
-    // })
-    // // 3. Update joystick position when mousemove/touchmove
-    // document.addEventListener('mousemove', (e)=>{
-    //     if(dragging){
-    //         handleMovement(e.clientX, e.clientY);
-    //     }
-    // })
+    stick.addEventListener('mousedown', (e)=>{
+        dragging = true;
+    })
+    // 2. Disable dragging of joystick when mousedown/touchdown
+    document.addEventListener('mouseup', ()=>{
+        if(dragging){
+            dragging = false;
+            resetStickPosition();
+        }
+    })
+    // 3. Update joystick position when mousemove/touchmove
+    document.addEventListener('mousemove', (e)=>{
+        if(dragging){
+            handleMovement(e.clientX, e.clientY);
+        }
+    })
 });
 //testing vin
