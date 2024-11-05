@@ -58,11 +58,11 @@ else:
 def motor_forward(speed, pin1, pin2, pwm):
     pin1.high()
     pin2.low()
-    pwm.duty_u16(int(speed*65535/100))
+    pwm.duty_u16(int(speed*65535))
 def motor_reverse(speed, pin1, pin2, pwm):
     pin1.low()
     pin2.high()
-    pwm.duty_u16(int(speed*65535/100))
+    pwm.duty_u16(int(speed*65535))
 def motor_stop(pin1, pin2, pwm):
     pin1.low()
     pin2.low()
@@ -79,65 +79,79 @@ def index(requsst):
 @app.get('/direction')
 @with_websocket
 async def index(request, ws):
+    vel = 75/100
     try:
         while True:
             led.high()
             mode = await ws.receive()
-            
             ## Insert your logic here
             print("key", mode)
             #big robot
             '''
             if mode=='w':
-                motor_forward(75, bL_pin1, bL_pin2, PWM1)
-                motor_forward(75, fL_pin1, fL_pin2, PWM2)
-                motor_forward(75, fR_pin1, fR_pin2, PWM3)
-                motor_forward(75, bR_pin1, bR_pin2, PWM4)
+                motor_forward(speed, bL_pin1, bL_pin2, PWM1)
+                motor_forward(speed, fL_pin1, fL_pin2, PWM2)
+                motor_forward(speed, fR_pin1, fR_pin2, PWM3)
+                motor_forward(speed, bR_pin1, bR_pin2, PWM4)
             elif mode=='s':
-                motor_reverse(75, bL_pin1, bL_pin2, PWM1)
-                motor_reverse(75, fL_pin1, fL_pin2, PWM2)
-                motor_reverse(75, fR_pin1, fR_pin2, PWM3)
-                motor_reverse(75, bR_pin1, bR_pin2, PWM4)
+                motor_reverse(speed, bL_pin1, bL_pin2, PWM1)
+                motor_reverse(speed, fL_pin1, fL_pin2, PWM2)
+                motor_reverse(speed, fR_pin1, fR_pin2, PWM3)
+                motor_reverse(speed, bR_pin1, bR_pin2, PWM4)
             elif mode=='a':
-                motor_reverse(75, bL_pin1, bL_pin2, PWM1)
-                motor_reverse(75, fL_pin1, fL_pin2, PWM2)
-                motor_forward(75, fR_pin1, fR_pin2, PWM3)
-                motor_forward(75, bR_pin1, bR_pin2, PWM4)
+                motor_reverse(speed, bL_pin1, bL_pin2, PWM1)
+                motor_reverse(speed, fL_pin1, fL_pin2, PWM2)
+                motor_forward(speed, fR_pin1, fR_pin2, PWM3)
+                motor_forward(speed, bR_pin1, bR_pin2, PWM4)
             elif mode=='d':
-                motor_forward(75, bL_pin1, bL_pin2, PWM1)
-                motor_forward(75, fL_pin1, fL_pin2, PWM2)
-                motor_reverse(75, fR_pin1, fR_pin2, PWM3)
-                motor_reverse(75, bR_pin1, bR_pin2, PWM4)
+                motor_forward(speed, bL_pin1, bL_pin2, PWM1)
+                motor_forward(speed, fL_pin1, fL_pin2, PWM2)
+                motor_reverse(speed, fR_pin1, fR_pin2, PWM3)
+                motor_reverse(speed, bR_pin1, bR_pin2, PWM4)
             '''
                 
             #small robot				redblack, redblack, redblack, redblack
-            if mode=='w': 
-                motor_forward(75, bL_pin1, bL_pin2, PWM1) 
-                motor_reverse(75, fL_pin1, fL_pin2, PWM2) 
-                motor_reverse(75, fR_pin1, fR_pin2, PWM3)
-                motor_forward(75, bR_pin1, bR_pin2, PWM4)
+            if mode=='w':
+                print("the vel here is " + str(vel))
+                motor_forward(vel, bL_pin1, bL_pin2, PWM1) 
+                motor_reverse(vel, fL_pin1, fL_pin2, PWM2) 
+                motor_reverse(vel, fR_pin1, fR_pin2, PWM3)
+                motor_forward(vel, bR_pin1, bR_pin2, PWM4)
             elif mode=='s': 
-                motor_reverse(75, bL_pin1, bL_pin2, PWM1)
-                motor_forward(75, fL_pin1, fL_pin2, PWM2) 
-                motor_forward(75, fR_pin1, fR_pin2, PWM3)
-                motor_reverse(75, bR_pin1, bR_pin2, PWM4)
+                motor_reverse(vel, bL_pin1, bL_pin2, PWM1)
+                motor_forward(vel, fL_pin1, fL_pin2, PWM2) 
+                motor_forward(vel, fR_pin1, fR_pin2, PWM3)
+                motor_reverse(vel, bR_pin1, bR_pin2, PWM4)
             elif mode=='a': 
-                motor_reverse(75, bL_pin1, bL_pin2, PWM1)
-                motor_forward(75, fL_pin1, fL_pin2, PWM2)
-                motor_reverse(75, fR_pin1, fR_pin2, PWM3)
-                motor_forward(75, bR_pin1, bR_pin2, PWM4)
+                motor_reverse(vel, bL_pin1, bL_pin2, PWM1)
+                motor_forward(vel, fL_pin1, fL_pin2, PWM2)
+                motor_reverse(vel, fR_pin1, fR_pin2, PWM3)
+                motor_forward(vel, bR_pin1, bR_pin2, PWM4)
             elif mode=='d': 
-                motor_forward(75, bL_pin1, bL_pin2, PWM1)
-                motor_reverse(75, fL_pin1, fL_pin2, PWM2)
-                motor_forward(75, fR_pin1, fR_pin2, PWM3)
-                motor_reverse(75, bR_pin1, bR_pin2, PWM4)
-            
-    
+                motor_forward(vel, bL_pin1, bL_pin2, PWM1)
+                motor_reverse(vel, fL_pin1, fL_pin2, PWM2)
+                motor_forward(vel, fR_pin1, fR_pin2, PWM3)
+                motor_reverse(vel, bR_pin1, bR_pin2, PWM4)
+            elif mode== 'i':
+                vel+=0.1
+                PWM1.duty_u16(int(vel*65535))
+                PWM2.duty_u16(int(vel*65535))
+                PWM3.duty_u16(int(vel*65535))
+                PWM4.duty_u16(int(vel*65535))
+                print(vel)
+            elif mode == 'o':
+                vel-=0.1
+                PWM1.duty_u16(int(vel*65535))
+                PWM2.duty_u16(int(vel*65535))
+                PWM3.duty_u16(int(vel*65535))
+                PWM4.duty_u16(int(vel*65535))
+                print(vel)
             else:
                 motor_stop(bL_pin1, bL_pin2, PWM1)
                 motor_stop(fL_pin1, fL_pin2, PWM2)
                 motor_stop(fR_pin1, fR_pin2, PWM3)
                 motor_stop(bR_pin1, bR_pin2, PWM4)
+                
             
                 
     except Exception as e:
