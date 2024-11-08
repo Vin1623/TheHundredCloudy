@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     let dragging = false;
     let animationFrameId = null;
 
+    const keysPressed = {};
+
     // Initialize WebSocket connection
     let socket = new WebSocket("ws://192.168.0.217/direction");
     /*
@@ -51,38 +53,55 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         }
     };
 
-    // What should the joystick do?
-    // 1. Enable dragging of joystick when mousedown/touchdown
-
-    /*
-    const pressedKeys = new Set();
-
     document.addEventListener('keydown', function(event) {
-        const key = event.key.toLowerCase();
-
-        if (!pressedKeys.has(key) && ['w', 'a', 's', 'd'].includes(key)) {
-            pressedKeys.add(key);
-            pressedKeys.forEach(function(key){
-                console.log(`You pressed the ${key.toUpperCase()} key!`);
-                socket.send(key);
-            })
-            if (event.repeat){
-                pressedKeys.forEach(function(key){
-                    console.log(`You pressed the ${key.toUpperCase()} key!`);
-                    socket.send(key);
-                })
+        
+        // Track which keys are currently pressed
+        keysPressed[event.key] = true;
+      
+        // Check for specific key combinations
+        if (keysPressed['w']) {
+            if (keysPressed['a']){
+                console.log("You pressed the W and A keys!");
+            }
+            else if (keysPressed['d']){
+                console.log("You pressed the W and D keys!");
+            } else {
+                console.log("You pressed the W key!");
             }
         }
-    });
-
-    document.addEventListener('keyup', function(event) {
-        const key = event.key.toLowerCase();
-        if (pressedKeys.has(key)) {
-            pressedKeys.delete(key);
+        else if (keysPressed['s']) {
+            if (keysPressed['a']){
+                console.log("You pressed the S and A keys!");
+            }
+            else if (keysPressed['d']){
+                console.log("You pressed the S and D keys!");
+            } else {
+                console.log("You pressed the S key!");
+            }
         }
-    });
-    */
-     
+        else if (keysPressed['a']){
+            console.log("You pressed the A key!");
+        }
+        else if (keysPressed['d']){
+            console.log("You pressed the D key!");
+        }
+        if (keysPressed['i']) {
+            console.log('You pressed the I key!');
+          // Do something else
+        }
+        else if (keysPressed['o']) {
+            console.log('You pressed the O key!');
+          // Do something else
+        }
+      });
+      
+      document.addEventListener('keyup', function(event) {
+        // Remove the key from the tracked keys when it is released
+        //socket.send(' ');
+        keysPressed[event.key] = false;
+      });
+
+    /*
     document.addEventListener('keydown', function(event) {
         if (event.key.toLowerCase() === 'w') {
             console.log('You pressed the W key!');
@@ -95,7 +114,14 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         } 
         else if (event.key.toLowerCase() === 'd') {
             console.log('You pressed the D key!');
-        }
+        } 
+        else if (event.key.toLowerCase() === 'i') {
+            console.log('You pressed the I key!');
+        } 
+        else if (event.key.toLowerCase() === 'o') {
+            console.log('You pressed the O key!');
+        } 
+        
         else {
             return;
         }
@@ -112,33 +138,36 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             } 
             else if (event.key.toLowerCase() === 'd') {
                 console.log('You pressed the D key!');
-            }
+            } 
+            else if (event.key.toLowerCase() === 'i') {
+                console.log('You pressed the I key!');
+            } 
+            else if (event.key.toLowerCase() === 'o') {
+                console.log('You pressed the O key!');
+            } 
             else {
                 return;
             }
             socket.send(event.key);
         }
     });
+    */
 
-    document.addEventListener('keyup', function(event) {
-        socket.send(' ');
-    });
-    
-    // stick.addEventListener('mousedown', (e)=>{
-    //     dragging = true;
-    // })
-    // // 2. Disable dragging of joystick when mousedown/touchdown
-    // document.addEventListener('mouseup', ()=>{
-    //     if(dragging){
-    //         dragging = false;
-    //         resetStickPosition();
-    //     }
-    // })
-    // // 3. Update joystick position when mousemove/touchmove
-    // document.addEventListener('mousemove', (e)=>{
-    //     if(dragging){
-    //         handleMovement(e.clientX, e.clientY);
-    //     }
-    // })
+    stick.addEventListener('mousedown', (e)=>{
+         dragging = true;
+    })
+    // 2. Disable dragging of joystick when mousedown/touchdown
+    document.addEventListener('mouseup', ()=>{
+        if(dragging){
+            dragging = false;
+            resetStickPosition();
+        }
+    })
+    // 3. Update joystick position when mousemove/touchmove
+    document.addEventListener('mousemove', (e)=>{
+        if(dragging){
+            handleMovement(e.clientX, e.clientY);
+        }
+    })
 });
 //testing vin
